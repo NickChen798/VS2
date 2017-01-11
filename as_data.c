@@ -616,8 +616,8 @@ static int set_userdata(client_t *cc, u32 size)
     d_msg("Set UserData: %d\n", size);
     if(vs1_set_userdata(cc->rbuf+ASCMD_SZ, size) == 0)
         send_cmd_data(cc, ASCMD_D2S_USERDATA, 1, 0, 0);
-    else
-        send_cmd_data(cc, ASCMD_D2S_USERDATA, 0xffff, 0, 0);
+    //else
+    //    send_cmd_data(cc, ASCMD_D2S_USERDATA, 0xffff, 0, 0);
     return 0;
 }
 
@@ -2167,7 +2167,6 @@ int vs1_roi_out(roi_info_t *roi)
     fh.usec = roi->usec;
     fh.sub_type = ASF_VTYPE_GRAY;
     fh.padding = roi->id;
-	printf("[ROI_OUT] CH0%d ASYF_MAGIC 1.\n",roi->id);
     if(!roi || !roi->status) {
         fh.width = 0;
         fh.height = 0;
@@ -2180,13 +2179,11 @@ int vs1_roi_out(roi_info_t *roi)
         fh.flags = (roi->status) ? ASF_FLAG_MOTION : 0;
         fh.size = fh.width * fh.height * CD_GROUP_NR;
     }
-	printf("[ROI_OUT] CH0%d ASYF_MAGIC 2.\n",roi->id);
     if(send(sd, &fh, ASFH_SZ, 0) != ASFH_SZ) {
         d_err("[ROI] send failed: %s\n", strerror(errno));
         roi_cid = -1;
         return -1;
     }
-	printf("[ROI_OUT] CH0%d ASYF_MAGIC 3.\n",roi->id);
 #else
     as_yframe_t fh;
     fh.magic = ASYF_MAGIC;
@@ -2209,13 +2206,11 @@ int vs1_roi_out(roi_info_t *roi)
         fh.y = roi->top;
     }
 	//printf("\n\n\n\n[D] fh.sec = %u,fh.usec = %u,fh.flags = %u,fh.size = %u\n\n\n\n",fh.sec,fh.usec,fh.flags,fh.size);
-    printf("[ROI_OUT] CH0%d ASYF_MAGIC 4.\n",roi->id);
 	if(send(sd, &fh, ASYFH_SZ, 0) != ASYFH_SZ) {
         d_err("[ROI] send failed: %s\n", strerror(errno));
         roi_cid = -1;
         return -1;
     }
-	printf("[ROI_OUT] CH0%d ASYF_MAGIC 5.\n",roi->id);
 #endif
 
     if(!fh.size)
@@ -2237,7 +2232,6 @@ int vs1_roi_out(roi_info_t *roi)
 		//	fwrite(roi->data[i],1,1920*1080,fp);
 		//	fclose( fp );
 		//}
-		printf("[ROI_OUT] CH0%d ASYF_MAGIC 7.\n",roi->id);
         while(line <= roi->bottom) {
 
             fd_set wds;
@@ -2287,7 +2281,6 @@ int vs1_roi_out(roi_info_t *roi)
 			else
 			{
 				t_count++;
-				printf("[ROI_OUT] CH0%d ASYF_MAGIC 11,retval = %d.\n",roi->id,retval);
 				if (t_count==5)
 				{
 					return -1;

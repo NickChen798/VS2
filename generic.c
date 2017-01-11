@@ -330,7 +330,7 @@ int as_gen_fw_get_version(char *version, u32 size) {
  * @return      firmware version number in 32bits
  */
 u32 as_gen_fw_get_version_num(void) {
-   return 0x0000002A;
+   return 0x0000002B;
 }
 
 /*!

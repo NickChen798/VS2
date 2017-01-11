@@ -1532,7 +1532,7 @@ _roi_init3_:
 					{
 						dto=dto+detect_roi[q];
 					}
-					if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+					if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 				}
 				else //empty give green light
 				{
@@ -1674,7 +1674,7 @@ ROI_OUT:
 						{
 							dto=dto+detect_roi[q];
 						}
-						if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+						if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 					}
                 }
                 else {
@@ -1847,7 +1847,7 @@ _roi_init4_:
 					{
 						dto=dto+detect_roi[q];
 					}
-					if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+					if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 				}
 				else //empty give green light
 				{
@@ -1990,7 +1990,7 @@ ROI_OUT:
 						{
 							dto=dto+detect_roi[q];
 						}
-						if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+						if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 					}
                 }
                 else {
@@ -2162,7 +2162,7 @@ _roi_init2_:
 					{
 						dto=dto+detect_roi[q];
 					}
-					if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+					if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 				}
 				else //empty give green light
 				{
@@ -2334,7 +2334,7 @@ ROI_OUT:
 								{
 									dto=dto+detect_roi[q];
 								}
-								if (dto==total_roi){vs1_set_do(2,socket_type);led_status = 1;}
+								if (dto==total_roi){vs1_set_do(led_lights%10,socket_type);led_status = 1;}
 							}
                 }
                 else {
@@ -2506,19 +2506,19 @@ _roi_init1_:
 				va_dbg("\n\n[VA1] roi_detect_count = %d , total_roi = %d , detect_roi = %d\n\n",roi_decect_count,total_roi,dto);					
 				if( total_roi == (roi_decect_count+dto) && gflag == 0)
 				{
-					vs1_set_do(2,socket_type);
+					vs1_set_do(led_lights%10,socket_type);
 					led_status = 1;
 				}
 				else //empty give green light
 				{
 					if (mflag == 1)//Monthly mode
 					{
-						vs1_set_do(2,socket_type);
+						vs1_set_do(led_lights%10,socket_type);
 						led_status = 1;
 					}
 					else //enforce green light mode
 					{
-						vs1_set_do(1,socket_type);
+						vs1_set_do(led_lights/10,socket_type);
 						led_status = 0;
 					}
 				}
@@ -2687,7 +2687,7 @@ ROI_OUT:
 					va_dbg("[VA1] \n\nroi_detect_count = %d , total_roi = %d , detect_roi = %d\n\n",roi_decect_count,total_roi,dto);					
 					if( total_roi == (roi_decect_count+dto) && gflag == 0)
 						{
-							vs1_set_do(2,socket_type);
+							vs1_set_do(led_lights%10,socket_type);
 							led_status = 1;
 							//if(mutex_yuv==0){
 							//	dm_SetYUV_Res(1);
@@ -2698,12 +2698,12 @@ ROI_OUT:
 					{
 						if (mflag == 1)//Monthly mode
 						{
-							vs1_set_do(2,socket_type);
+							vs1_set_do(led_lights%10,socket_type);
 							led_status = 1;
 						}
 						else //enforce green light mode
 						{
-							vs1_set_do(1,socket_type);
+							vs1_set_do(led_lights/10,socket_type);
 							led_status = 0;
 							/*							if(mutex_yuv==1){							
 							dm_SetYUV_Res(0);
